@@ -1,26 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from ..models import Post, Group
+from ..models import Post
 
 
 User = get_user_model()
 
 
 class PostModelTest(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.user = User.objects.create_user('auth')
-        cls.group = Group.objects.create(
-            title='Название группы',
-            slug='slug',
-            description='Описание группы',
-        )
-        cls.post = Post.objects.create(
-            author=cls.user,
-            text='Текст поста',
-            group=cls.group,
-        )
 
     def test_post_str(self):
         post = Post(text="Короткий пост")

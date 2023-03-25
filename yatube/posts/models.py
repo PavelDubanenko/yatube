@@ -81,7 +81,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["-created"]
-        # default_related_name = "comments"
+        default_related_name = "comments"
 
 
 class Follow(models.Model):
@@ -97,3 +97,10 @@ class Follow(models.Model):
         related_name='following',
         verbose_name='Автор'
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'], name='unique_author_user_following'
+            )
+        ]

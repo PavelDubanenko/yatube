@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from ..models import Post, Group
+from django.core.cache import cache
 from http import HTTPStatus
 
 
@@ -43,6 +44,7 @@ class PostsURLTest(TestCase):
         # Авторизированный пользователь
         self.authorized_user = Client()
         self.authorized_user.force_login(PostsURLTest.auth_user)
+        cache.clear()
 
 # Проверяем общедоступные страницы
     def test_urls_exists_at_desired_location(self):
